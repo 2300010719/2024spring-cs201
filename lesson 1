@@ -1,0 +1,40 @@
+lesson 1:
+多项式时间复杂度：
+s = input()
+l = []
+x = ''
+for i in range(len(s)):
+    if s[i] == '+':
+        l.append(x)
+        x = ''
+    else:
+        x += s[i]
+l.append(x)
+y = 0
+for i in range(len(l)):
+    if l[i][0] != '0':
+        for j in range(len(l[i])):
+            if l[i][j] == 'n':
+                y = max(y, int(l[i][j+2:]))
+print('n^'+str(y))
+学习了fraction类的定义
+代码如下：
+import math
+class Fraction:
+    def __init__(self,top,bottom):
+        self.a = top
+        self.b = bottom
+
+    def __str__(self):
+        return str(self.a) + "/" +str(self.b)
+
+    def __add__(self, other):
+        x = self.a * other.b + self.b * other.a
+        y = self.b * other.b
+        z = math.gcd(x,y)
+        return Fraction(x//z,y//z)
+
+l = list(map(int,input().split()))
+x = Fraction(l[0],l[1])
+y = Fraction(l[2],l[3])
+print(x + y)
